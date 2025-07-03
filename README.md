@@ -7,6 +7,7 @@ L'objectif est de créer une application sous forme de chatbot en utilisant Spri
   #### Concepts de base, 
   #### Architecture et Spécifications du Protocole MCP 
   #### Comment créer un serveur MCP SSE avec Java Spring
+  
   #### Comment Tester le serveur MCP avec Postman
   #### Comment Créer un Client MCP avec Spring AI, Llama3.2, Claude et OpenAI
   #### Comment déployer un serveur MCP NodeJS en mode STDIO dans le client MCP Spring AI 
