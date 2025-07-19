@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>net.youssouf</groupId>
-    <artifactId>mcp-client</artifactId>
+    <artifactId>mcp-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mcp-client</name>
-    <description>mcp-client</description>
+    <name>mcp-server</name>
+    <description>mcp-server</description>
     <url/>
     <licenses>
         <license/>
@@ -27,37 +27,13 @@
         <url/>
     </scm>
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <spring-ai.version>1.0.0</spring-ai.version>
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-mcp-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.8.9</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-json</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-model-ollama</artifactId>
+            <artifactId>spring-ai-starter-mcp-server</artifactId>
         </dependency>
 
         <dependency>
@@ -65,7 +41,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
     <dependencyManagement>
         <dependencies>

@@ -1,43 +1,54 @@
 package net.youssouf.mcpclient.agent;
 
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.tool.ToolCallbackProvider;
-import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.stereotype.Service;
+import org.springframework.http.*;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class AIAgent {
-    private ChatClient chatClient;
 
-    public AIAgent(ChatClient.Builder chatClient, ToolCallbackProvider toolCallbackProvider) {
-        this.chatClient = chatClient
-                .defaultToolCallbacks(toolCallbackProvider)
-                .defaultSystem("Answer the user question using provided tool callback")
-                .build();
-    }
+    private static final String OLLAMA_API_URL = "http://localhost:11434/api/generate";
+    private final RestTemplate restTemplate = new RestTemplate();
 
     public String askLLM(String query) {
         if (query == null || query.trim().isEmpty()) {
-            return "⚠️ La requête est vide. Veuillez entrer une question.";
+            return "La requête est vide.";
         }
 
         try {
-            System.out.println("💬 Question posée : " + query);
+            System.out.println("Question posée : " + query);
 
-            String response = chatClient
-                    .prompt()
-                    .user(query)
-                    .call()
-                    .content();
+            // Corps JSON pour l'API Ollama
+            Map<String, Object> requestBody = new HashMap<>();
+            requestBody.put("model", "llama2");
+            requestBody.put("prompt", query);
+            requestBody.put("stream", false);
 
-            System.out.println("✅ Réponse IA : " + response);
-            return response != null ? response : "⚠️ Réponse vide de l'IA.";
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
+
+            // Appel à l'API Ollama
+            ResponseEntity<Map> response = restTemplate.postForEntity(OLLAMA_API_URL, entity, Map.class);
+
+            if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
+                Object result = response.getBody().get("response");
+                if (result != null) {
+                    String texte = result.toString().trim();
+                    System.out.println("Réponse IA : " + texte);
+                    return texte;
+                }
+            }
+
+            return "Réponse vide ou inattendue de l'IA.";
+
         } catch (Exception e) {
             e.printStackTrace();
-            return "❌ Erreur lors de la réponse de l'IA : " + e.getMessage();
+            return "Erreur lors de l'appel à Ollama : " + e.getMessage();
         }
     }
-
-
-
 }

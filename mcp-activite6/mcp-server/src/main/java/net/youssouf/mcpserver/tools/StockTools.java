@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 
-//@Service
+@Service
 public class StockTools {
 
     private List<Company> companies = List.of(
