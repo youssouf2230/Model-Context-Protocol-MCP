@@ -19,4 +19,7 @@ L'objectif est de créer une application sous forme de chatbot en utilisant Spri
   #### Comment déployer un serveur MCP Python en mode STDIO dans le client MCP Spring AI 
   #### Comment rendre l'application Agentique
 #### - Tester l'application avec Swagger UI 
+envoie une image et extraire les informations
+<img width="1402" height="681" alt="image" src="https://github.com/user-attachments/assets/2f4ce70b-a982-4c99-a09c-c187620c76b6" />
+
 #### Créer un Frontend Angular ou React pour cette application
